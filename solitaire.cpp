@@ -88,6 +88,10 @@ void Solitaire::DownPiece(QPoint pos)
 			else
 			{
 				moveSteps++;
+				if (moveSteps == 1)
+				{
+					ui.action_finish->setEnabled(true);
+				}
 				ui.statusBar->showMessage("Skip Count: " + QString("%1").arg(moveSteps));
 				if (recordingSteps)
 				{
@@ -196,6 +200,7 @@ void Solitaire::StartNewGame()
 	isFinished = false;
 	recordingSteps = ui.action_record->isChecked();
 	PaintBoard();
+	ui.action_finish->setEnabled(false);
 	if (recordingSteps)
 	{
 		QDateTime nowTime = QDateTime::currentDateTime();
@@ -259,6 +264,7 @@ void Solitaire::FinishGame()
 	}
 	msgBox.exec();
 	isFinished = true;
+	ui.action_finish->setEnabled(false);
 }
 
 void Solitaire::ShowAbout()
