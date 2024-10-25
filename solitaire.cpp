@@ -12,14 +12,13 @@ Solitaire::Solitaire(QWidget *parent)
 	connect(ui.graphicsView, SIGNAL(hover_blank(QPoint)), this, SLOT(HoverBlank(QPoint)));
 	connect(ui.graphicsView, SIGNAL(down_piece(QPoint)), this, SLOT(DownPiece(QPoint)));
 	connect(ui.action_restart, SIGNAL(triggered()), this, SLOT(StartNewGame()));
-	connect(ui.action_english, SIGNAL(triggered()), this, SLOT(StartNewGame()));
-	connect(ui.action_european, SIGNAL(triggered()), this, SLOT(StartNewGame()));
 	connect(ui.action_finish, SIGNAL(triggered()), this, SLOT(FinishGame()));
 	connect(ui.action_about, SIGNAL(triggered()), this, SLOT(ShowAbout()));
 	connect(ui.action_help, SIGNAL(triggered()), this, SLOT(ShowHelp()));
 	gameModes = new QActionGroup(this);
     gameModes->addAction(ui.action_english);
     gameModes->addAction(ui.action_european);
+	connect(gameModes, SIGNAL(triggered(QAction*)), this, SLOT(ChangeGame(QAction*)));
 	StartNewGame();
 }
 
@@ -190,9 +189,8 @@ QPoint Solitaire::getPiecePoint(QPoint pos)
 
 void Solitaire::StartNewGame()
 {
-	int variant = ui.action_english->isChecked() ? 0 : 1;
 	engine = new SolEngine();
-	engine->StartNewBoard(variant);
+	engine->StartNewBoard(gameVariant);
 	moveSteps = 0;
 	ui.statusBar->showMessage("");
 	isFinished = false;
@@ -203,6 +201,20 @@ void Solitaire::StartNewGame()
 		QDateTime nowTime = QDateTime::currentDateTime();
 		QString filename = "SOL_" + nowTime.toString("yyyyMMddhhmmsszzz") + ".log";
 		stepLogFile = new QFile(filename);
+	}
+}
+
+void Solitaire::ChangeGame(QAction* action)
+{
+	if (ui.action_english->isChecked() && gameVariant == 1)
+	{
+		gameVariant = 0;
+		StartNewGame();
+	}
+	if (ui.action_european->isChecked() && gameVariant == 0)
+	{
+		gameVariant = 1;
+		StartNewGame();
 	}
 }
 

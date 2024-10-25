@@ -25,6 +25,7 @@ private:
     QPoint* hoveredBlank;
     QPoint* lastPoint;
     QFile* stepLogFile;
+    int gameVariant = 0;
     int moveSteps = 0;
     bool isFinished = false;
     bool recordingSteps = false;
@@ -36,6 +37,7 @@ public slots:
     void HoverBlank(QPoint pos);
     void DownPiece(QPoint pos);
     void StartNewGame();
+    void ChangeGame(QAction* action);
     void FinishGame();
     void ShowAbout();
     void ShowHelp();
