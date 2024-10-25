@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35312.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Solitaire", "Solitaire.vcxproj", "{1614C60F-2F77-4DB9-96C8-7AE4F50610B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1614C60F-2F77-4DB9-96C8-7AE4F50610B7}.Debug|x64.ActiveCfg = Debug|x64
+		{1614C60F-2F77-4DB9-96C8-7AE4F50610B7}.Debug|x64.Build.0 = Debug|x64
+		{1614C60F-2F77-4DB9-96C8-7AE4F50610B7}.Release|x64.ActiveCfg = Release|x64
+		{1614C60F-2F77-4DB9-96C8-7AE4F50610B7}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72E712C0-3F50-4C97-8219-86923DAA0BF5}
+	EndGlobalSection
+EndGlobal

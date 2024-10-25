@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/Solitaire"/>
+    <qresource prefix="/icon">
+        <file>gif/about.gif</file>
+        <file>gif/english.gif</file>
+        <file>gif/european.gif</file>
+        <file>gif/finish.gif</file>
+        <file>gif/help.gif</file>
+        <file>gif/record.gif</file>
+        <file>gif/restart.gif</file>
+        <file>gif/board_english.gif</file>
+        <file>gif/board_european.gif</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SolitaireClass</class>
+ <widget class="QMainWindow" name="SolitaireClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>480</width>
+    <height>536</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>80</width>
+    <height>140</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Solitaire</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QSolitaireView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>256</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="action_finish"/>
+   <addaction name="action_restart"/>
+   <addaction name="action_record"/>
+   <addaction name="separator"/>
+   <addaction name="action_english"/>
+   <addaction name="action_european"/>
+   <addaction name="separator"/>
+   <addaction name="action_help"/>
+   <addaction name="action_about"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="action_finish">
+   <property name="icon">
+    <iconset resource="solitaire.qrc">
+     <normaloff>:/icon/gif/finish.gif</normaloff>:/icon/gif/finish.gif</iconset>
+   </property>
+   <property name="text">
+    <string>Finish</string>
+   </property>
+  </action>
+  <action name="action_restart">
+   <property name="icon">
+    <iconset resource="solitaire.qrc">
+     <normaloff>:/icon/gif/restart.gif</normaloff>:/icon/gif/restart.gif</iconset>
+   </property>
+   <property name="text">
+    <string>Restart</string>
+   </property>
+  </action>
+  <action name="action_record">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="solitaire.qrc">
+     <normaloff>:/icon/gif/record.gif</normaloff>:/icon/gif/record.gif</iconset>
+   </property>
+   <property name="text">
+    <string>Record</string>
+   </property>
+  </action>
+  <action name="action_english">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="solitaire.qrc">
+     <normaloff>:/icon/gif/english.gif</normaloff>:/icon/gif/english.gif</iconset>
+   </property>
+   <property name="text">
+    <string>English</string>
+   </property>
+  </action>
+  <action name="action_european">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="solitaire.qrc">
+     <normaloff>:/icon/gif/european.gif</normaloff>:/icon/gif/european.gif</iconset>
+   </property>
+   <property name="text">
+    <string>European</string>
+   </property>
+  </action>
+  <action name="action_help">
+   <property name="icon">
+    <iconset resource="solitaire.qrc">
+     <normaloff>:/icon/gif/help.gif</normaloff>:/icon/gif/help.gif</iconset>
+   </property>
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="action_about">
+   <property name="icon">
+    <iconset resource="solitaire.qrc">
+     <normaloff>:/icon/gif/about.gif</normaloff>:/icon/gif/about.gif</iconset>
+   </property>
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QSolitaireView</class>
+   <extends>QGraphicsView</extends>
+   <header>qsolitaireview.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="solitaire.qrc"/>
+ </resources>
+ <connections/>
+</ui>
