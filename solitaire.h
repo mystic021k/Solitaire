@@ -33,7 +33,6 @@ private:
     void PaintBoard();
     QPoint getPiecePoint(QPoint* pos);
 
-    QWidget *QMainWindow;
 public slots:
     void SelectPiece(QPoint* pos);
     void HoverBlank(QPoint* pos);
