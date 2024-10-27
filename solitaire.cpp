@@ -7,25 +7,28 @@
 Solitaire::Solitaire(QWidget *parent)
     : QMainWindow(parent)
 {
-    ui.setupUi(this);
-	connect(ui.graphicsView, SIGNAL(select_piece(QPoint)), this, SLOT(SelectPiece(QPoint)));
-	connect(ui.graphicsView, SIGNAL(hover_blank(QPoint)), this, SLOT(HoverBlank(QPoint)));
-	connect(ui.graphicsView, SIGNAL(down_piece(QPoint)), this, SLOT(DownPiece(QPoint)));
+	ui.setupUi(this);
+	connect(ui.graphicsView, SIGNAL(select_piece(QPoint*)), this, SLOT(SelectPiece(QPoint*)));
+	connect(ui.graphicsView, SIGNAL(hover_blank(QPoint*)), this, SLOT(HoverBlank(QPoint*)));
+	connect(ui.graphicsView, SIGNAL(down_piece(QPoint*)), this, SLOT(DownPiece(QPoint*)));
 	connect(ui.action_restart, SIGNAL(triggered()), this, SLOT(StartNewGame()));
 	connect(ui.action_finish, SIGNAL(triggered()), this, SLOT(FinishGame()));
 	connect(ui.action_about, SIGNAL(triggered()), this, SLOT(ShowAbout()));
 	connect(ui.action_help, SIGNAL(triggered()), this, SLOT(ShowHelp()));
 	gameModes = new QActionGroup(this);
-    gameModes->addAction(ui.action_english);
-    gameModes->addAction(ui.action_european);
+	gameModes->addAction(ui.action_english);
+	gameModes->addAction(ui.action_european);
 	connect(gameModes, SIGNAL(triggered(QAction*)), this, SLOT(ChangeGame(QAction*)));
+	selectedPiece = new QPoint(-1, -1);
+	hoveredBlank = new QPoint(-1, -1);
+	lastPoint = new QPoint(-1, -1);
 	StartNewGame();
 }
 
 Solitaire::~Solitaire()
 {}
 
-void Solitaire::SelectPiece(QPoint pos)
+void Solitaire::SelectPiece(QPoint* pos)
 {
 	if (isFinished)
 	{
@@ -43,7 +46,7 @@ void Solitaire::SelectPiece(QPoint pos)
 	}
 }
 
-void Solitaire::HoverBlank(QPoint pos)
+void Solitaire::HoverBlank(QPoint* pos)
 {
 	if (isFinished)
 	{
@@ -61,7 +64,7 @@ void Solitaire::HoverBlank(QPoint pos)
 	}
 }
 
-void Solitaire::DownPiece(QPoint pos)
+void Solitaire::DownPiece(QPoint* pos)
 {
 	if (isFinished)
 	{
@@ -118,7 +121,7 @@ void Solitaire::DownPiece(QPoint pos)
 
 void Solitaire::resizeEvent(QResizeEvent* event)
 {
-    ui.graphicsView->setGeometry(0, 0, this->width(), this->height() - 56);
+	ui.graphicsView->setGeometry(0, 0, this->width(), this->height() - 56);
 	PaintBoard();
 }
 
@@ -139,15 +142,18 @@ void Solitaire::PaintBoard()
 				if (engine->GetBoardNum(x, y) == 1)
 				{
 					QPen pen;
-					if (selectedPiece != nullptr && selectedPiece->x() >= 0 && selectedPiece->y() >= 0 && x == selectedPiece->x() && y == selectedPiece->y())
+					if (selectedPiece != nullptr)
 					{
-						pen.setColor(Qt::red);
-						pen.setWidth(2);
-						pen.setStyle(Qt::SolidLine);
-					}
-					else
-					{
-						pen.setStyle(Qt::NoPen);
+						if (selectedPiece->x() >= 0 && selectedPiece->y() >= 0 && x == selectedPiece->x() && y == selectedPiece->y())
+						{
+							pen.setColor(Qt::red);
+							pen.setWidth(2);
+							pen.setStyle(Qt::SolidLine);
+						}
+						else
+						{
+							pen.setStyle(Qt::NoPen);
+						}
 					}
 					QRadialGradient radialGrad(QPointF(leftStart + pieceSize * x + pieceSize / 3, topStart + pieceSize * y + pieceSize / 3), pieceSize / 2);
 					radialGrad.setColorAt(0, Qt::white);
@@ -161,14 +167,17 @@ void Solitaire::PaintBoard()
 					pen.setColor(Qt::black);
 					pen.setWidth(1);
 					QBrush brush;
-					if (hoveredBlank != nullptr && hoveredBlank->x() >= 0 && hoveredBlank->y() >= 0 && x == hoveredBlank->x() && y == hoveredBlank->y())
+					if (hoveredBlank != nullptr)
 					{
-						brush.setColor(Qt::black);
-						brush.setStyle(Qt::Dense5Pattern);
-					}
-					else
-					{
-						brush.setStyle(Qt::NoBrush);
+						if (hoveredBlank->x() >= 0 && hoveredBlank->y() >= 0 && x == hoveredBlank->x() && y == hoveredBlank->y())
+						{
+							brush.setColor(Qt::darkGray);
+							brush.setStyle(Qt::Dense5Pattern);
+						}
+						else
+						{
+							brush.setStyle(Qt::NoBrush);
+						}
 					}
 					scene->addEllipse(QRectF(leftStart + pieceSize * x + 1, topStart + pieceSize * y + 1, pieceSize - 2, pieceSize - 2), pen, brush);
 				}
@@ -178,9 +187,9 @@ void Solitaire::PaintBoard()
 	}
 }
 
-QPoint Solitaire::getPiecePoint(QPoint pos)
+QPoint Solitaire::getPiecePoint(QPoint* pos)
 {
-	QPoint distPoint = pos - QPoint(leftStart, topStart);
+	QPoint distPoint = *pos - QPoint(leftStart, topStart);
 	if (distPoint.x() >= 0 && distPoint.y() >= 0)
 	{
 		return QPoint(distPoint.x() / pieceSize, distPoint.y() / pieceSize);
@@ -269,7 +278,7 @@ void Solitaire::FinishGame()
 
 void Solitaire::ShowAbout()
 {
-	QMessageBox::about(this, "About", "About Solitaire\r\n\r\nVersion 1.0\r\n2024.10.25");
+	QMessageBox::about(this, "About", "About Solitaire\r\n\r\nVersion 1.1\r\n2024.10.28");
 }
 
 void Solitaire::ShowHelp()

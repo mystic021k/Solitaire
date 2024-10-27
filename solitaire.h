@@ -1,5 +1,6 @@
 #pragma once
 #include <QtWidgets/QMainWindow>
+#include <QActionGroup>
 #include <QFile>
 #include "ui_solitaire.h"
 #include "solEngine.h"
@@ -30,12 +31,13 @@ private:
     bool isFinished = false;
     bool recordingSteps = false;
     void PaintBoard();
-    QPoint getPiecePoint(QPoint pos);
+    QPoint getPiecePoint(QPoint* pos);
 
+    QWidget *QMainWindow;
 public slots:
-    void SelectPiece(QPoint pos);
-    void HoverBlank(QPoint pos);
-    void DownPiece(QPoint pos);
+    void SelectPiece(QPoint* pos);
+    void HoverBlank(QPoint* pos);
+    void DownPiece(QPoint* pos);
     void StartNewGame();
     void ChangeGame(QAction* action);
     void FinishGame();

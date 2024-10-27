@@ -14,15 +14,18 @@ QSolitaireView::QSolitaireView(QGraphicsScene* scene, QWidget* parent)
 
 void QSolitaireView::mousePressEvent(QMouseEvent* event)
 {
-	emit select_piece(event->pos());
+	QPoint point = event->pos();
+	emit select_piece(&point);
 }
 
 void QSolitaireView::mouseMoveEvent(QMouseEvent* event)
 {
-	emit hover_blank(event->pos());
+	QPoint point = event->pos();
+	emit hover_blank(&point);
 }
 
 void QSolitaireView::mouseReleaseEvent(QMouseEvent* event)
 {
-	emit down_piece(event->pos());
+	QPoint point = event->pos();
+	emit down_piece(&point);
 }

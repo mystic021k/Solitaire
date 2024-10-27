@@ -6,9 +6,9 @@ class QSolitaireView :
 {
     Q_OBJECT
 signals:
-    void select_piece(QPoint pos);
-    void hover_blank(QPoint pos);
-    void down_piece(QPoint pos);
+    void select_piece(QPoint* pos);
+    void hover_blank(QPoint* pos);
+    void down_piece(QPoint* pos);
 public:
     QSolitaireView(QWidget* parent);
     QSolitaireView(QGraphicsScene* scene, QWidget* parent);
